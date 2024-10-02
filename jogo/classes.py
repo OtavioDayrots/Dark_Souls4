@@ -5,7 +5,7 @@ class Personagens:
         self.dano = dano
     
 class Armas:
-    def __init__(self, dano, alcance, poder=='NULL') -> None:
+    def __init__(self, dano, alcance, poder='NULL') -> None:
         self.dano = dano
         self.alcance = alcance
         self.poder = poder
