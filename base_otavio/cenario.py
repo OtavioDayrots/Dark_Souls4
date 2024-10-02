@@ -13,36 +13,36 @@ screen = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption("Cenário Simples")
 
 # Verificar se a imagem de fundo existe
-if not os.path.exists("fundo.jpg"):
+if not os.path.exists("base_otavio/fundo.jpg"):
     print("Erro: Imagem de fundo não encontrada.")
     sys.exit()
 
 # Verificar se a imagem do personagem existe
-if not os.path.exists("personagem.png"):
+if not os.path.exists("base_otavio/personagem.png"):
     print("Erro: Imagem do personagem não encontrada.")
     sys.exit()
 
 # Verificar se a imagem da espada existe
-if not os.path.exists("espada.png"):
+if not os.path.exists("base_otavio/espada.png"):
     print("Erro: Imagem da espada não encontrada.")
     sys.exit()
 
 # Verificar se a imagem do inimigo existe
-if not os.path.exists("inimigo.png"):
+if not os.path.exists("base_otavio/inimigo.png"):
     print("Erro: Imagem do inimigo não encontrada.")
     sys.exit()
 
 # Carregar as imagens
-fundo = pygame.image.load("fundo.jpg")
+fundo = pygame.image.load("base_otavio/fundo.jpg")
 fundo = pygame.transform.scale(fundo, (largura, altura))
 
-personagem = pygame.image.load("personagem.png")
+personagem = pygame.image.load("base_otavio/personagem.png")
 personagem = pygame.transform.scale(personagem, (90, 90))
 
-espada = pygame.image.load("espada.png")
+espada = pygame.image.load("base_otavio/espada.png")
 espada = pygame.transform.scale(espada, (40, 40))  # Tamanho da espada
 
-inimigo_img = pygame.image.load("inimigo.png")
+inimigo_img = pygame.image.load("base_otavio/inimigo.png")
 inimigo_img = pygame.transform.scale(inimigo_img, (64, 64))
 
 # Posição inicial do personagem
