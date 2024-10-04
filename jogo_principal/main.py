@@ -7,4 +7,4 @@ from views import *
 pygame.init()
 
 def main():
-    pass
+    tela()
