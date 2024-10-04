@@ -20,29 +20,29 @@ scale_factor = 1.75
 class Player:
     def __init__(self):
         # Carrega e escala as imagens de idle para a esquerda
-        self.images_idle_left = [pygame.transform.scale(pygame.image.load("Trabalho PyGame_/Projeto Dark Souls do gpt/spr_hero_leftidle0.png"), (int(64 * scale_factor), int(64 * scale_factor))),
-                                  pygame.transform.scale(pygame.image.load("Trabalho PyGame_/Projeto Dark Souls do gpt/spr_hero_leftidle1.png"), (int(64 * scale_factor), int(64 * scale_factor)))]
+        self.images_idle_left = [pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftidle0.png"), (int(64 * scale_factor), int(64 * scale_factor))),
+                                  pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftidle1.png"), (int(64 * scale_factor), int(64 * scale_factor)))]
 
         # Carrega e escala as imagens de idle para a direita (espelhadas)
         self.images_idle_right = [pygame.transform.flip(img, True, False) for img in self.images_idle_left]
 
         # Carrega e escala as imagens de corrida para a esquerda
-        self.images_run_left = [pygame.transform.scale(pygame.image.load("Trabalho PyGame_/Projeto Dark Souls do gpt/spr_hero_leftrun0.png"), (int(64 * scale_factor), int(64 * scale_factor))),
-                                pygame.transform.scale(pygame.image.load("Trabalho PyGame_/Projeto Dark Souls do gpt/spr_hero_leftrun1.png"), (int(64 * scale_factor), int(64 * scale_factor))),
-                                pygame.transform.scale(pygame.image.load("Trabalho PyGame_/Projeto Dark Souls do gpt/spr_hero_leftrun2.png"), (int(64 * scale_factor), int(64 * scale_factor))),
-                                pygame.transform.scale(pygame.image.load("Trabalho PyGame_/Projeto Dark Souls do gpt/spr_hero_leftrun3.png"), (int(64 * scale_factor), int(64 * scale_factor)))]
-        
-        
-        
+        self.images_run_left = [pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun0.png"), (int(64 * scale_factor), int(64 * scale_factor))),
+                                pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun1.png"), (int(64 * scale_factor), int(64 * scale_factor))),
+                                pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun2.png"), (int(64 * scale_factor), int(64 * scale_factor))),
+                                pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun3.png"), (int(64 * scale_factor), int(64 * scale_factor)))]
+    
+        # Carrega e escala as imagens de corrida para a direita (espelhadas)
+        self.images_run_right = [pygame.transform.flip(img, True, False) for img in self.images_run_left]
 
-        self.images_run_up =[pygame.transform.scale(pygame.image.load("Trabalho PyGame_/Projeto Dark Souls do gpt/spr_hero_leftrun0.png"), (int(64 * scale_factor), int(64 * scale_factor))),
-                                pygame.transform.scale(pygame.image.load("Trabalho PyGame_/Projeto Dark Souls do gpt/spr_hero_leftrun1.png"), (int(64 * scale_factor), int(64 * scale_factor))),
-                                pygame.transform.scale(pygame.image.load("Trabalho PyGame_/Projeto Dark Souls do gpt/spr_hero_leftrun2.png"), (int(64 * scale_factor), int(64 * scale_factor))),
-                                pygame.transform.scale(pygame.image.load("Trabalho PyGame_/Projeto Dark Souls do gpt/spr_hero_leftrun3.png"), (int(64 * scale_factor), int(64 * scale_factor)))]
+        self.images_run_up =[pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun0.png"), (int(64 * scale_factor), int(64 * scale_factor))),
+                                pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun1.png"), (int(64 * scale_factor), int(64 * scale_factor))),
+                                pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun2.png"), (int(64 * scale_factor), int(64 * scale_factor))),
+                                pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun3.png"), (int(64 * scale_factor), int(64 * scale_factor)))]
         
         # Carrega e escala as imagens de corrida para baixo (você pode usar imagens específicas se tiver)
-        self.images_run_down = [pygame.transform.scale(pygame.image.load("Trabalho PyGame_/Projeto Dark Souls do gpt/spr_hero_leftidle0.png"), (int(64 * scale_factor), int(64 * scale_factor))),
-                                pygame.transform.scale(pygame.image.load("Trabalho PyGame_/Projeto Dark Souls do gpt/spr_hero_leftidle1.png"), (int(64 * scale_factor), int(64 * scale_factor)))]
+        self.images_run_down = [pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftidle0.png"), (int(64 * scale_factor), int(64 * scale_factor))),
+                                pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftidle1.png"), (int(64 * scale_factor), int(64 * scale_factor)))]
 
         
 
