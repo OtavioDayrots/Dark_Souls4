@@ -14,28 +14,40 @@ pygame.display.set_caption("Animação de Movimento")
 BLACK = (0, 0, 0)
 
 # Fator de escala para o personagem
-scale_factor = 1.75  # Ajuste esse valor para aumentar ou diminuir o tamanho
+scale_factor = 1.75
 
 # Configurações do personagem
 class Player:
     def __init__(self):
+        # Carrega e escala as imagens de idle para a esquerda
+        self.images_idle_left = [pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftidle0.png"), (int(64 * scale_factor), int(64 * scale_factor))),
+                                  pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftidle1.png"), (int(64 * scale_factor), int(64 * scale_factor)))]
 
-        self.images_idle_left = [pygame.transform.scale(pygame.image.load("C:\Users\LuizOliveira\Desktop\pygame\Trabalho PyGame\Projeto Dark Souls do gpt\Projeto Dark Souls do gpt/spr_hero_leftidle0.png"), (int(64 * scale_factor), int(64 * scale_factor))),
-                                  pygame.transform.scale(pygame.image.load("C:/Users/LuanMendes/Desktop/Nova pasta/spr_hero_leftidle1.png"), (int(64 * scale_factor), int(64 * scale_factor)))]
+        # Carrega e escala as imagens de idle para a direita (espelhadas)
+        self.images_idle_right = [pygame.transform.flip(img, True, False) for img in self.images_idle_left]
 
-        self.images_idle_right = [pygame.transform.scale(pygame.image.load("C:/Users/LuanMendes/Desktop/Nova pasta/spr_hero_rightidle0.png"), (int(64 * scale_factor), int(64 * scale_factor))),
-                                   pygame.transform.scale(pygame.image.load("C:/Users/LuanMendes/Desktop/Nova pasta/spr_hero_rightidle1.png"), (int(64 * scale_factor), int(64 * scale_factor)))]
+        # Carrega e escala as imagens de corrida para a esquerda
+        self.images_run_left = [pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun0.png"), (int(64 * scale_factor), int(64 * scale_factor))),
+                                pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun1.png"), (int(64 * scale_factor), int(64 * scale_factor))),
+                                pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun2.png"), (int(64 * scale_factor), int(64 * scale_factor))),
+                                pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun3.png"), (int(64 * scale_factor), int(64 * scale_factor)))]
+        
+        
+        # Carrega e escala as imagens de corrida para a direita (espelhadas)
+        self.images_run_right = [pygame.transform.flip(img, True, False) for img in self.images_run_left]
 
-        self.images_run_left = [pygame.transform.scale(pygame.image.load("C:/Users/LuanMendes/Desktop/Nova pasta/spr_hero_leftrun0.png"), (int(64 * scale_factor), int(64 * scale_factor))),
-                                pygame.transform.scale(pygame.image.load("C:/Users/LuanMendes/Desktop/Nova pasta/spr_hero_leftrun1.png"), (int(64 * scale_factor), int(64 * scale_factor))),
-                                pygame.transform.scale(pygame.image.load("C:/Users/LuanMendes/Desktop/Nova pasta/spr_hero_leftrun2.png"), (int(64 * scale_factor), int(64 * scale_factor))),
-                                pygame.transform.scale(pygame.image.load("C:/Users/LuanMendes/Desktop/Nova pasta/spr_hero_leftrun3.png"), (int(64 * scale_factor), int(64 * scale_factor)))]
+        self.images_run_up =[pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun0.png"), (int(64 * scale_factor), int(64 * scale_factor))),
+                                pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun1.png"), (int(64 * scale_factor), int(64 * scale_factor))),
+                                pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun2.png"), (int(64 * scale_factor), int(64 * scale_factor))),
+                                pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun3.png"), (int(64 * scale_factor), int(64 * scale_factor)))]
+        
+        # Carrega e escala as imagens de corrida para baixo (você pode usar imagens específicas se tiver)
+        self.images_run_down = [pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftidle0.png"), (int(64 * scale_factor), int(64 * scale_factor))),
+                                pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftidle1.png"), (int(64 * scale_factor), int(64 * scale_factor)))]
 
-        self.images_run_right = [pygame.transform.scale(pygame.image.load("C:/Users/LuanMendes/Desktop/Nova pasta/spr_hero_rightrun0.png"), (int(64 * scale_factor), int(64 * scale_factor))),
-                                 pygame.transform.scale(pygame.image.load("C:/Users/LuanMendes/Desktop/Nova pasta/spr_hero_rightrun1.png"), (int(64 * scale_factor), int(64 * scale_factor))),
-                                 pygame.transform.scale(pygame.image.load("C:/Users/LuanMendes/Desktop/Nova pasta/spr_hero_rightrun2.png"), (int(64 * scale_factor), int(64 * scale_factor))),
-                                 pygame.transform.scale(pygame.image.load("C:/Users/LuanMendes/Desktop/Nova pasta/spr_hero_rightrun3.png"), (int(64 * scale_factor), int(64 * scale_factor)))]
 
+
+        # Inicializa a imagem e a posição do personagem
         self.image = self.images_idle_right[0]
         self.rect = self.image.get_rect(center=(screen_width // 2, screen_height // 2))
         self.speed = 5
@@ -44,8 +56,8 @@ class Player:
         self.idle_frame = 0
         self.run_frame = 0
         self.clock = pygame.time.Clock()
-        self.frame_counter = 0  # Contador de frames para animações
-        self.run_frame_counter = 0  # Contador específico para animação de corrida
+        self.frame_counter = 0
+        self.run_frame_counter = 0
 
     def update(self):
         keys = pygame.key.get_pressed()
@@ -61,13 +73,16 @@ class Player:
             self.is_running = True
         if keys[pygame.K_UP]:
             self.rect.y -= self.speed
+            self.direction = "up"
+            self.is_running = True
         if keys[pygame.K_DOWN]:
             self.rect.y += self.speed
+            self.direction = "down"
+            self.is_running = True
 
-        # Atualiza a imagem
         if self.is_running:
             self.run_frame_counter += 1
-            if self.run_frame_counter >= 5:  # Aumente este valor para desacelerar a animação
+            if self.run_frame_counter >= 5:
                 if self.direction == "left":
                     self.image = self.images_run_left[self.run_frame % len(self.images_run_left)]
                 else:
@@ -75,7 +90,7 @@ class Player:
                 self.run_frame += 1
                 self.run_frame_counter = 0
         else:
-            self.run_frame_counter = 0  # Reseta o contador de frames de corrida quando não está correndo
+            self.run_frame_counter = 0
             if self.direction == "left":
                 self.image = self.images_idle_left[self.idle_frame % len(self.images_idle_left)]
                 self.frame_counter += 1
@@ -89,7 +104,6 @@ class Player:
                     self.idle_frame += 1
                     self.frame_counter = 0
 
-        # Reseta os frames quando chega no fim da animação
         if not self.is_running:
             if self.idle_frame >= len(self.images_idle_left):
                 self.idle_frame = 0
@@ -110,16 +124,11 @@ def main():
                 pygame.quit()
                 sys.exit()
 
-        # Atualiza o estado do jogador
         player.update()
 
-        # Preenche a tela com a cor preta
         screen.fill(BLACK)
-
-        # Desenha o jogador
         player.draw(screen)
 
-        # Atualiza a tela
         pygame.display.flip()
         player.clock.tick(30)
 
