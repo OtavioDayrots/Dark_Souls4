@@ -22,7 +22,7 @@ class Player:
         # Carrega e escala as imagens de idle para a esquerda
         self.images_idle_left = [pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftidle0.png"), (int(64 * scale_factor), int(64 * scale_factor))),
                                   pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftidle1.png"), (int(64 * scale_factor), int(64 * scale_factor)))]
-
+        
         # Carrega e escala as imagens de idle para a direita (espelhadas)
         self.images_idle_right = [pygame.transform.flip(img, True, False) for img in self.images_idle_left]
 
@@ -31,21 +31,18 @@ class Player:
                                 pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun1.png"), (int(64 * scale_factor), int(64 * scale_factor))),
                                 pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun2.png"), (int(64 * scale_factor), int(64 * scale_factor))),
                                 pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun3.png"), (int(64 * scale_factor), int(64 * scale_factor)))]
-    
+
         # Carrega e escala as imagens de corrida para a direita (espelhadas)
         self.images_run_right = [pygame.transform.flip(img, True, False) for img in self.images_run_left]
 
-        self.images_run_up =[pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun0.png"), (int(64 * scale_factor), int(64 * scale_factor))),
-                                pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun1.png"), (int(64 * scale_factor), int(64 * scale_factor))),
-                                pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun2.png"), (int(64 * scale_factor), int(64 * scale_factor))),
-                                pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftrun3.png"), (int(64 * scale_factor), int(64 * scale_factor)))]
-        
-        # Carrega e escala as imagens de corrida para baixo (você pode usar imagens específicas se tiver)
-        self.images_run_down = [pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftidle0.png"), (int(64 * scale_factor), int(64 * scale_factor))),
-                                pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftidle1.png"), (int(64 * scale_factor), int(64 * scale_factor)))]
+        # Carrega e escala as imagens de corrida para cima
+        self.images_idle_up =  [pygame.transform.flip(img, True, False) for img in self.images_idle_left]
 
-        
-
+        # Carrega e escala as imagens de corrida para baixo
+        self.images_run_down = [
+            pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftidle0.png"), (int(64 * scale_factor), int(64 * scale_factor))),
+            pygame.transform.scale(pygame.image.load("Trabalho PyGame/Projeto Dark Souls do gpt/spr_hero_leftidle1.png"), (int(64 * scale_factor), int(64 * scale_factor)))
+        ]
 
         # Inicializa a imagem e a posição do personagem
         self.image = self.images_idle_right[0]
@@ -63,30 +60,50 @@ class Player:
         keys = pygame.key.get_pressed()
         self.is_running = False
 
+        # Determina a direção com base nas teclas pressionadas
         if keys[pygame.K_LEFT]:
             self.rect.x -= self.speed
             self.direction = "left"
             self.is_running = True
-        elif keys[pygame.K_RIGHT]:
+            
+        if keys[pygame.K_RIGHT]:
             self.rect.x += self.speed
             self.direction = "right"
             self.is_running = True
+            
         if keys[pygame.K_UP]:
             self.rect.y -= self.speed
-            self.direction = "up"
             self.is_running = True
+            
+            # Verifica a direção de acordo com as teclas pressionadas
+            if keys[pygame.K_LEFT]:
+                self.direction = "left"  # Subindo para a esquerda
+            elif keys[pygame.K_RIGHT]:
+                self.direction = "right"  # Subindo para a direita
+            else:
+                self.direction = "left"  # Subindo sem direção lateral (vira para a esquerda)
+
         if keys[pygame.K_DOWN]:
             self.rect.y += self.speed
-            self.direction = "down"
             self.is_running = True
+            
+            if not keys[pygame.K_RIGHT]  and  not keys[pygame.K_LEFT]:
+                self.direction = "right"  # Somente para baixo, vira para a esquerda
+            
 
+        # Atualiza as animações
         if self.is_running:
             self.run_frame_counter += 1
             if self.run_frame_counter >= 5:
                 if self.direction == "left":
                     self.image = self.images_run_left[self.run_frame % len(self.images_run_left)]
-                else:
+                elif self.direction == "right":
                     self.image = self.images_run_right[self.run_frame % len(self.images_run_right)]
+                elif self.direction == "up":
+                    self.image = self.images_run_up[self.run_frame % len(self.images_run_up)]
+                elif self.direction == "down":
+                    self.image = self.images_run_down[self.run_frame % len(self.images_run_down)]
+                
                 self.run_frame += 1
                 self.run_frame_counter = 0
         else:
