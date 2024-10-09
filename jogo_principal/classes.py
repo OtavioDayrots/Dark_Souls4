@@ -16,3 +16,13 @@ class Armas:
         self.dano = dano
         self.alcance = alcance
         self.poder = poder
+
+class Fundo:
+    def __init__(self, img, altura, largura, borda_left, borda_rigth, borda_top, borda_down) -> None:
+        self.img = img
+        self.altura = altura
+        self.largura = largura
+        self.borda_left = borda_left
+        self.borda_rigth = borda_rigth
+        self.borda_top = borda_top
+        self.borda_down = borda_down
